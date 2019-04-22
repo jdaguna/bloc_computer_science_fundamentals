@@ -36,12 +36,17 @@ END WHILE
 RETURN false
 
 4.
+JavaScript:
+function findPhoneNumber(){
+phonebook = ["(555) 555-5555"];
+var isFound = false;
+var phoneNumber = prompt("Please enter phone number to search", "(555) 555-5555"); 
 
-var number = prompt(“Please enter phone number to search”, “(555) 555-5555”); 
-var counter = 0;
-while counter<phonebook.length{
-	if number === phonebook[counter]
-		return true;
-	counter += 1;
-} 
-return false; 
+if (phonebook.includes(phoneNumber)){
+  isFound = true;
+}
+
+return isFound;
+}
+
+console.log(findPhoneNumber());
