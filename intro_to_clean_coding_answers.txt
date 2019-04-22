@@ -1,0 +1,138 @@
+Clean code is simple, readable, and easy to maintain. This helps you and others understand what the code is doing at a glance versus having to figure out and understand what is happening.
+
+2. A major part of a cell phones is the software, without it the device would be a useless brick. If the software contains bugs it could lead to the device not turning on, dropping calls, unexpectedly restarting, applications not opening, overheating, or even early failure of the hardware.
+
+3. No, this code example is not clean. It is using comments on every line explaining what is happening, it is also over engineered, and the variable names are not easily to read.
+
+FUNCTION celsiusConversion(fahrenheit)
+	SET celsius to (fahrenheit - 32) * (5/9)
+	PRINT celsius
+END FUNCTION
+
+FUNCTION fahrenheitConversion(celsius)
+	SET fahrenheit to (celsius *1.80 +32.00)
+	PRINT fahrenheit 
+END FUNCTION
+
+4. No, the code is not considered clean. It doesn’t nest appropriately and it takes some time to understand the logic of the if statement.
+
+FUNCTION percentageCalculation(number, total)
+	IF total = 0
+		Print “Sorry, cannot divide by 0”
+	ELSE
+		Print number / total * 100
+	END IF
+END FUNCTION
+
+5a.
+
+FUNCTION customerCheckOut (subTotal, discountRate, paymentType)
+	SET total = subTotal * discountRate + (subTotal * tax)
+	PRINT “Your total dues is: ” + total
+
+	IF paymentType = “CASH” THEN
+		CALL getPayment RETURNING amountPaid
+		SET change = amountPaid - total
+		Print “Change due: ” + change
+	ELSE IF paymentType = “CREDIT CARD” THEN
+		CALL getPayment RETURNING amountPaid
+		Print “Your credit card has been charged: ” + total 
+	END IF
+END FUNCTION
+
+5b.
+
+FUNCTION bookCheckout(book, guest)
+IF guest.accountActive AND NOT(guest.hasOverdueBooks) AND guest.oustandingFees = 0
+	APPEND book to guest.books
+	SET book.status t0 “Checked Out”
+	PRINT “Your books have been issued”
+ELSE
+	PRINT “Unable to check out book.”
+END IF 
+END FUNCTION
+
+
+5c.
+CLASS BankAccount
+	FUNCTION balanceDisplay
+		PRINT balance
+	END FUNCTION
+
+	FUNCTION deposit(amount)
+		SET balance to balance + amount
+	END FUNCTION
+
+	FUNCTION withdraw(amount)
+		IF balance > amount THEN
+			SET balance to balance - amount
+		END IF
+	END FUNCTION
+
+	FUNCTION creditCardOffer
+		IF NOT (customer.hasCreditCard) THEN
+			CALL offerCreditCard
+		END IF
+	END FUNCTION
+
+	FUNCION statusCheck
+		IF NOT (customer.hasCheckingAccount) THEN
+			CALL offerCheckingAccount
+		END IF
+	END FUNCTION
+END CLASS
+
+6.
+function isPerfectSquare(array){
+  sum = array.reduce(((accumlator, currentValue) => accumlator + currentValue));
+
+  if (Math.sqrt(sum) % 1 === 0){
+    return Math.sqrt(sum);
+  }
+    return sum;
+}
+
+console.log(isPerfectSquare([10,1,4,6,1,1,2]));//return 5
+console.log(isPerfectSquare([1,1]));//return 2
+
+7.
+function hasDuplicates(array){
+  var testCase = 0;
+  for(var testCounter = 0; testCounter < array.length; testCounter++){
+    testCase = array[testCounter];
+    for (arrayCounter = testCounter + 1; arrayCounter < array.length; arrayCounter++){
+      if (testCase === array[arrayCounter])
+        return true;
+    }
+
+  }
+  return false; 
+}
+
+console.log(hasDuplicates([0,1,2,3,4])); //false
+console.log(hasDuplicates([1,1,2,3,4])); //true
+
+
+8. 
+function isAnagram(string1, string2){
+  result = true;
+	arrayString1 = string1.split("");	
+  arrayString1.sort();
+	arrayString2 = string2.split("");
+	arrayString2.sort();
+  
+	if(arrayString1.length != arrayString2.length){
+    return false;
+  } else {
+		for (var i = 0; i < arrayString1.length; i++){
+			if (arrayString1[i] !== arrayString2[i]){
+        return false;
+      }
+		}
+	}
+	return result;
+}
+
+console.log(isAnagram("hello","ohell")); //true
+console.log(isAnagram("hello","ohello")); //false
+console.log(isAnagram("helloworld","worldhello")); //true
