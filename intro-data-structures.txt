@@ -1,0 +1,17 @@
+1.
+function amusementParkLine(array){
+ array.push("Mary"); //adds Mary to end of line
+ console.log(array.indexOf("Josh")); //returns 2
+ console.log(array.indexOf("Emily")); // returns -1 if not found
+ array.splice(1, 0, "Mellisa"); //inserts Mellisa in front of Ava
+ array.splice(4,1); //removes Patrick
+ return array;
+}
+
+console.log(amusementParkLine(["Vivian", "Ava", "Josh", "Patrick", "Mike"]));
+
+2.
+Use an array to hold the license plate numbers of cars allowed to park in employee parking lot.
+
+3. 
+Since it is an array, developers can add new plates, remove old plates, or search for a license plate to check if a car belongs or not.
