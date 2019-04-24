@@ -2,9 +2,11 @@
 
 2. They both are used to manage and prioritize a list of tasks.
 
-3. 
-For UNDO, use LIFO because "UNDO" would typically remove the last thing I did.
-For REDO: use FIFO because "REDO" would typically add the first think that I "UNDO".
+3. When implementing UNDO/REDO utilizing stacks, we can keep a list of commands that have been completed in stack-one.
+UNDO: takes the last item in that stack and moves it to the bottom of stack-two.
+REDO: takes the last item in stack-two and moves it into the bottom of stack-one.
+
+This is using LIFO. Last in First Out.
 
 Programming Questions:
 1.
