@@ -1,0 +1,147 @@
+hash-tables-questions.txt
+
+#### Questions
+> 1. What is a hash table?
+
+A: A hash table is a type of data structure that stores key/value pairs. Each key must be unique, values are searched by the key, and uses an internal array to store the data.
+
+> 2. What is hashing?
+
+A: Hashing is the process of converting a key to an integer. We use the interger within the array.
+
+> 3. How does a hash table store data?
+
+A: Hash tables stores data inside an array, it uses integers created from the hashing as the index.
+
+> 4. How are hash tables and objects different?
+
+A: A hash table is a group of similiar data, you get the data (values) by looking for the identifier (key). The key returns all the values associated with it. Objects are a collection of different types of data or properties. For objects we can call upon the different properties to get their individual values.
+
+> 5. Determine whether you would use a hash table or an object to store each of the following pieces of data:
+	Hash Table: A list of pets and their unique names.
+	Object:	The name, age, and the birthday of your best friend. 
+	Hash Table: The name and location of every copmany in a given city.
+	Hash Table: All of the books checked out from a library by a particular indiviudal.
+	Object:	The primary and secondary phone numbers for a contact.
+
+#### Programming Questions
+
+> 1. Create a hash table that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers.
+
+class customerDatabase {
+  constructor(name, address, phoneNumber) {
+    this.name = name;
+    this.address = address;
+    this.phoneNumber = phoneNumber;
+    this.table = [];
+    this.size = 1234;
+  }
+
+  hashing(phoneNumber) {
+    let hashCode = "";
+    for (let i = 0; i < phoneNumber.length; i++) {
+      hashCode += (phoneNumber.charCodeAt(i));
+    }
+     hashCode = parseInt(hashCode, 10);
+     let trueIndex = hashCode % this.size;
+     return trueIndex;
+  }
+
+  set(name, address, phoneNumber) {
+    let trueIndex = this.hashing(phoneNumber);
+    this.table[trueIndex] = [name, address, phoneNumber];
+  }
+
+  get(phoneNumber) {
+    let trueIndex = this.hashing(phoneNumber);
+    return this.table[trueIndex];
+  }
+}
+
+var cd = new customerDatabase();
+cd.set("Josh", "5555 Fake Address Dr.", "(555) 555-5555");
+cd.set("Lady", "5555 Fake Address Dr.", "(925) 215-5345");
+cd.set("Christine", "5555 Fake Address Dr.", "(525) 445-5445");
+
+console.log(cd.get("(555) 555-5555"));
+console.log(cd.get("(925) 215-5345"));
+console.log(cd.get("(525) 445-5445"));
+
+> 2. Create a hash table that allows a store owner to track their store's invenotry and quantity.
+
+class storeDatabase {
+  constructor(inventory, quantity) {
+    this.inventory = inventory;
+    this.quantity = quantity;
+    this.table = [];
+    this.size = 1234;
+  }
+
+  hashing(inventory) {
+    let hashCode = "";
+    for (let i = 0; i < inventory.length; i++) {
+      hashCode += inventory.charCodeAt(i);
+    }
+    hashCode = parseInt(hashCode, 10);
+    return hashCode % this.size;
+  }
+
+  set(inventory, quantity) {
+    let trueIndex = this.hashing(inventory);
+    this.table[trueIndex] = quantity;
+  }
+
+  get(inventory) {
+    let trueIndex = this.hashing(inventory);
+    return this.table[trueIndex];
+  }
+}
+
+var sd = new storeDatabase();
+sd.set("juice", 50);
+sd.set("milk", 10);
+sd.set("steak", 32);
+sd.set("potatoes", 2);
+
+console.log(sd.get("juice"));
+console.log(sd.get("milk"));
+console.log(sd.get("steak"));
+console.log(sd.get("potatoes"));
+
+> 3. Create a hash table that allows digital copies of newspapers to be entered and searched by publisher and publication date.
+
+class digitalNewspaperDatabase {
+  constructor(publisher, publicationDate) {
+    this.publisher = publisher;
+    this.publicationDate = publicationDate;
+    this.table = [];
+    this.size = 1234;
+  }
+
+  hashing(publisherOrPublicationDate) {
+    let hashCode = "";
+    for (let i = 0; i < publisherOrPublicationDate.length; i++) {
+      hashCode += publisherOrPublicationDate.charCodeAt(i);
+    }
+    hashCode = parseInt(hashCode, 10);
+    return hashCode % this.size;
+  }
+
+  set(publisher, publicationDate) {
+    this.table[this.hashing(publisher)] = publicationDate;
+    this.table[this.hashing(publicationDate)] = publisher;
+  }
+
+  get(publisherOrPublicationDate){
+    return this.table[this.hashing(publisherOrPublicationDate)];
+  }
+}
+
+var dd = new digitalNewspaperDatabase();
+dd.set("San Francisco Chronicle", "01-01-1978");
+dd.set("USA Today", "01-01-2018");
+
+console.log(dd.get("01-01-1978"));
+console.log(dd.get("San Francisco Chronicle"));
+console.log(dd.get("01-01-2018"));
+console.log(dd.get("USA Today"));
