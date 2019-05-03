@@ -1,0 +1,190 @@
+#### Questions
+
+> What is a binary tree and what makes it unique to other trees?
+
+A: A binarty tree has two potential paths to take: the node points to a left and/or a right child.
+
+> What is a heuristic?
+
+A: It is an algorithim for guessing. It trades accuracy of a solution in favor of coming to soultion fast.
+
+
+> What is another problem besides the shortest-path problem that requires the use of heuristics?
+
+A: Heuristics are widely used in machine learning problems: email spam filter, estimating the value of a house in a market, probability of cancer in a patient.
+
+> What is the difference between a depth-first search and a breadth-first search?
+
+A: Depth-first searches all the way to the last level in a tree before back-tracking and moving on to the next node. Breadth-first explores all the nodes on the level before moving down to the next level on the tree.
+
+> Explain in your own words what an undirected, a-cyclic, unweighted graph is.
+
+A: This is a graph that forms a 2-way communication between nodes, that does not connect the last node to the first node, and all paths are treated with the same value.
+
+> What kind of graph is a binary search tree?
+
+A: It is a directed, a-cylic, unweighted graph.
+
+
+#### Programming
+
+1. Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
+Example: The value 10 exists in the tree. The value 23 does not exist in the tree.
+
+A: See Solution below.
+
+2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
+Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
+
+A: See Solution below.
+
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+class BinaryTree {
+  constructor() {
+    this.root = null;
+  }
+
+
+  deepSearch(data) {
+    return this.deepSearchNode(this.root, data);
+  }
+
+  deepSearchNode(node, data) {
+    //starting at root node, compare the data if less than look left, if greater look right, if equal return true
+    if (node === null)
+      return false;
+    else if (data < node.data)
+      return this.deepSearchNode(node.left, data);
+    else if (data > node.data)
+      return this.deepSearchNode(node.right, data);
+    else
+      return true; 
+  }
+
+  calculateDistance(root, node1, node2){
+    //checks to make sure nodes exists before calculate distance
+    if(this.deepSearchNode(this.root, node1) && this.deepSearchNode(this.root,node2)){
+      //Distance is calculated using the formula [distance to node1 from root] + [distance to node2 from root] - 2*[distance from root to lowest common ancestor]
+      let x = this.findDistance(root, node1) -1;
+      let y = this.findDistance(root, node2) -1;
+      let lca = this.findLCA(root, node1, node2);
+      let lcaDistance = this.findDistance(root, lca) -1 ;
+      let result = (x + y) - 2 *lcaDistance;
+      if (result < 0)
+         return result * -1;
+      return result;
+    }
+    return false;
+  }
+
+  findLCA(root, node1, node2){
+    if (root === null)
+      return nulll;
+    if(root.data > node1 && root.data > node2)
+      return this.findLCA(root.left, node1, node2);
+    else if (root.data <= node1 && root.data < node2)
+      return this.findLCA(root.right, node1, node2);
+    return root.data;
+  }
+
+  findDistance(root, n1) {
+    if (root != null) {
+			let x = 0;
+			if ((root.data == n1) || (x = this.findDistance(root.left, n1)) > 0 || (x = this.findDistance(root.right, n1)) > 0)
+				return x + 1;
+			return 0;
+		}
+		return 0;
+  }
+}
+
+var bt = new BinaryTree();
+
+//Setup Binary Tree
+bt.root = new Node(8);
+bt.root.left = new Node(3);
+bt.root.left.left = new Node(1);
+bt.root.left.right = new Node(6);
+bt.root.left.right.left = new Node(4);
+bt.root.left.right.right = new Node(7);
+bt.root.right = new Node(10);
+bt.root.right.right = new Node(14);
+bt.root.right.right.left = new Node(13);
+
+//Test Cases for Question #1
+console.log("Test Cases for Question #1");
+
+console.log("10 exists in tree: ", bt.deepSearch(10)); //returns true
+console.log("23 exists in tree: ", bt.deepSearch(23)); //returns false
+
+//Test Cases for Question #2
+console.log("\nTest Cases for Question #2");
+console.log("Distance between node 4 and node 10: ", bt.calculateDistance(bt.root,4,10)); //returns 4
+console.log("Distance between node 8 and node 10: ", bt.calculateDistance(bt.root,8,10)); //returns 1
+console.log("Distance between node 1 and node 14: ", bt.calculateDistance(bt.root,1,14)); //returns 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
