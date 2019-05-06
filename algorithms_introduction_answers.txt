@@ -1,0 +1,43 @@
+1. Using proper pseudo-code, describe the following primitive algorithms:
+
+A. Making coffee:
+WHILE cupsOfCoffee <= 0
+	Retrieve coffee beans
+	Grind coffee beans
+	Insert ground coffee beans into coffee maker
+	Insert water into coffee maker
+	Turn coffee maker on
+	Increment cupsOfCoffee
+ENDWHILE
+
+B. Washing dishes:
+WHILE dirtyDishes > 0
+	Add water to dish
+	Add soap to dish
+	Scrub dish with sponge
+	Rinse dish with water
+	Decrement dirty dishes
+ENDWHILE
+
+C. Paying Bills:
+WHILE bills > 0
+	Call company
+	Enter account information
+	Provide payment information
+	Get Confirmation Code
+	Decrement bills
+ENDWHILE
+
+2. As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
+
+
+A. UNOS (United Network for Organ Sharing): developed an algorithm that matches patients with organ donors across the nation. Previous methods meant finding a compatible donor within one's family or personal network, which can be very difficult. It is more likely that the patient knows someone that is willing to donate an organ but they are incompatible to each other. UNOs takes the incompatible organ and looks trade it for a compatible organ. At the end of the match, everyone receives a compatible organ and people spend less time on the waiting list for organs.
+
+B. Ocado: is on the forefront of creating an online automated grocery store. Customers send in order requests to the company and they use an algorithm that processes 3.5 million items or around 65,000 orders every week.
+
+C. Coco-Cola: is famous for their century old recipe and people in more than 200 countries drink 1.9 billion servings every day.
+
+
+3. Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+
+A: An efficient algorithm takes less time to complete a task than an inefficient algorithm.
