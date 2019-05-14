@@ -58,3 +58,6 @@ console.log(isPalindrome('racecar'));
 6. Google Easter Egg: Google the term "recursion". Google will prompt you with "Did you mean: recursion". Explain why this behavior exhibits properties of recursion.
 
 A: Recursion is all about calling itself. So when clicking the recursion easter egg it will link us back to the same page with the same easter egg.
+
+
+
