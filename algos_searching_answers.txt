@@ -1,0 +1,63 @@
+Questions
+
+What is a real-life scenario that uses linear search? 
+
+A: Looking up a name in a phone book starting from the beginning. 
+
+2. What is a real-life scenario of binary search: 
+
+A: Looking for a book in a library.
+
+3. Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find the value G using linear search?
+
+A: It would take 7 iterations using linear search.
+
+4. Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find the value G using binary search?
+
+A: It would take 3 interactions using binary search.
+
+5. Given an unsorted collection of a million items, which algorithm would you choose between linear search and binary search? Explain your reasoning.
+
+A: Since the data is unsorted I would use Linear Search. In order to implement binary search we would first have to sort the data set and then apply binary search, which would result in a slower time complexity.
+
+6: Given a sorted collection of a million items, which algorithm would you choose between linear search and binary search? Explain your reasoning.
+
+A: I would use binary search as it excels with large data sets. It searches at O(log n) compared to Linear search of O(n).
+
+Programming Assignment
+
+1. You and a friend have set a wager to see who can find the word “Albatross
+“ In the dictionary the fastest. Write a program to allow you to win the bet.
+ A:
+
+ function binarySearch(dictionary, word){
+   let count = 0;
+   let low = 0;
+   let high = dictionary.length-1;
+
+  while (low <= high){
+     count += 1;
+     let mid = Math.round((low + high) / 2);
+      if (dictionary[mid] > word)
+       high = mid -1;
+      else if (dictionary[mid] < word)
+       low = mid + 1;
+      else
+       return word + " found after " + count + " iterations";
+    }
+    return false;
+   }
+console.log(binarySearch(["alaria","alaric","alarm","alarmable","alarmclock","alarmed","alarmedly","alarming","alarmingly","alarmingness","alarmism","alarmisms","alarmist","alarmists","alarms","alarodian","alarum","alarumed","alaruming","alarums","alas","alasas","alascan","alaska","alaskaite","alaskan","alaskans","alaskas","alaskite","alastair","alaster","alastor","alastors","alastrim","alate","alated","alatern","alaternus","alation","alations","alauda","alaudidae","alaudine","alaund","alaunian","alaunt","alawi","alazor","alb","alba","albacea","albacora","albacore","albacores","albahaca","albainn","alban","albanenses","albanensian","albany","albania","albanian","albanians","albanite","albarco","albardine","albarelli","albarello","albarellos","albarium","albas","albaspidin","albata","albatas","albation","albatros","albatross","albatrosses","albe","albedo","albedograph","albedometer","albedos","albee","albeit","alberca","alberene","albergatrice","alberge","alberghi","albergo","alberich","albert","alberta","albertin","albertina","albertine","albertinian","albertype","albertist","albertite","alberto","alberttype","albertustaler","albescence","albescent","albespine","albespyne","albeston","albetad","albi","albian","albicans","albicant","albication","albicore","albicores","albiculi","albify","albification","albificative","albified","albifying","albiflorous","albigenses","albigensian","albigensianism","albin","albyn","albinal","albines","albiness","albinic","albinism","albinisms","albinistic","albino","albinoism","albinos","albinotic","albinuria","albion","albireo","albite","albites","albitic","albitical","albitite","albitization","albitophyre","albizia","albizias","albizzia","albizzias","albocarbon","albocinereous","albococcus","albocracy","alboin","albolite","albolith","albopannin","albopruinose","alborada","alborak","alboranite","albrecht","albricias","albright","albronze","albruna","albs","albuca","albuginaceae","albuginea","albugineous","albugines","albuginitis","albugo","album","albumean","albumen","albumeniizer","albumenisation","albumenise","albumen"]
+, 'albatros'));
+
+
+2. You work at a pet store, and a child has asked you to net the only white-spotted goldfish from the fish tank. Write a program that will help you net the right fish.
+
+function linearSearch(tank, fish){
+  for (let i = 0; i < tank.length; i++){
+    if (tank[i] === fish)
+      return "Found " + fish + " after " + i + " tries."
+  }
+}
+
+console.log(linearSearch(["Angelfish", "starfire red tiger barb", "gold several cichild", "fireboat cichild", "Texas cichild", "electric green long fin tetra", "sunburst orange long fin tetra", "halfmoon betta", "goldfish", "white-spotted goldfish", "tiger oscar", "cichild", "gold twiner platy"], "white-spotted goldfish"));
