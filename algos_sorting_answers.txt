@@ -1,0 +1,54 @@
+
+1. Implement a solution for bubble sort.
+
+function bubbleSort(dataset){ 
+let swapped;  
+do {    
+swapped = false;    
+	for (let i = 0; i < dataset.length; i++){      
+		if(dataset[i] > dataset[i+1]){        
+		 let temp = dataset[i];        
+		 dataset[i] = dataset[i+1];        
+		 dataset[i+1] = temp;       
+		 swapped = true;      
+		}    
+	}
+} while(swapped);  
+
+return dataset;
+}
+
+console.log(bubbleSort([1,3,5,7,0,2]));
+
+
+2. Write pseudocode for quicksort.
+
+//Pseudocode
+FUNCTION QUICKSORT takes array   
+IF array length < 2    
+ RETURN ARRAY   
+END IF      
+SET PIVOT to LAST VALUE of array     
+SET new array to lesser     
+SET new array to greater     
+FOR LOOP I = 1 < array length      
+ IF array at I is less than pivot        
+  ADD array at I to lesser     
+ELSE        
+  ADD array at I to greater      
+ END IF     
+END FOR          
+RETURN QUICKSORT(lesser) + PIVOT + QUICKSORT(greater)
+
+
+3. We talked about time complexity in a previous checkpoint, and how to get an idea of the efficiency of an algorithm. After looking at the pseudocode for the above sorting methods, identify why merge sort and quick sort are much more efficient than the others. Walking through each algorithm with a few sample collections may help.
+
+Merge sort and quick sort both have lower time complexities compared to Insertion, Selection, and Bubble sort. Merge sort and quick sort both use recursion to break down the data set into smaller sets and then combines them together into one sorted array. The other sorting algorithm makes numerous passes over the whole dataset to complete the sorting adding to their time complexity. So the time it takes to finish the sort grows with the number of data to sort.
+
+
+
+4. All of the sorts addressed in this checkpoint are known as comparison sorts. Research bucket sort and explain how it works. What is the ideal input for bucket sort?
+
+Bucket sort is also a comparison sort algorithm that divides the elements into different buckets and then sorts each bucket. Each bucket can use a different sorting algorithm or use a recursive call on the bucket. The ideal input for bucket sort is data that is uniformly distributed over a range.
+
+Since we are sorting the data into different buckets we can call sorting algorithms that are optimized leading to a lower time complexity.
