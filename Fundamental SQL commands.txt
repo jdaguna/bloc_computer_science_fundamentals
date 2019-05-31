@@ -1,7 +1,6 @@
 1. List the commands for adding, updating, and deleting data.
 
-INSERT INTO, UPDATE, DELETE, ALTER TABLE, DROP TABLE
-
+INSERT INTO, UPDATE, DELETE
 
 2. Explain the structure for each type of command.
 
@@ -10,9 +9,6 @@ INSERT INTO, nameOfTable, VALUES, (row of data with each column separated by a c
 UPDATE, nameOfTable, SET, columnName=newRowData WHERE columnName=rowData 
 DELETE FROM, nameOfTable, WHERE columnName=rowData 
 
-ALTER TABLE, nameOfTable, ADD COLUMN, newColumnName, dataType
-
-DROP TABLE, nameOfTable
 
 3. What are some of the data types that can be used in tables? Give a real-world example of each type.
 
@@ -25,21 +21,24 @@ Date: 2017-07-23
 4. Decide how to create a new table to hold a list of people invited to a wedding dinner. The table needs to have first and last names, whether they sent in their RSVP, the number of guests they are bringing, and the number of meals (1 for adults and 1/2 for children).
 
 Which data type would you use to store each of the following pieces of information?
-First and last name: varchar
-Whether they sent in their RSVP: char
+First Name: varchar
+Last Name: varchar
+
+Whether they sent in their RSVP: bool
 Number of guests: smallint
 Number of meals: decimal
 
 Write a command that creates the table to track the wedding dinner.
 CREATE TABLE wedding_dinner (
-	name varchar,
-	rsvp char(3),
+	first_name varchar,
+	last_name varchar,
+	rsvp bool,
 	guests smallint,
 	meals decimal
 );
 
 Write a command that adds a column to track whether the guest sent a thank you card.
-ALTER TABLE wedding_dinner ADD COLUMN received_thank_you_card char;
+ALTER TABLE wedding_dinner ADD COLUMN received_thank_you_card bool;
 
 You have decided to move the data about the meals to another table, so write a command to remove the column storing the number meals from the wedding table.
 ALTER TABLE wedding_dinner DROP COLUMN meals;
@@ -81,12 +80,13 @@ DELETE FROM library WHERE isbn='7475442155';
 6. Write a command to make a new table to hold spacecrafts. Information should include id, name, year launched, country of origin, a brief description of the mission, orbiting body, if it is currently operating, and its approximate miles from Earth. 
 
 CREATE TABLE spacecrafts (
+	id int,
 	name varchar,
 	launch_year smallint,
 	country_origin varchar,
 	mission_description text,
 	orbiting_body varchar,
-	operational char(3),
+	operational bool,
 	distance_from_earth bigint
 );
 
@@ -94,11 +94,11 @@ CREATE TABLE spacecrafts (
 In addition to the table creation, provide commands that perform the following operations:
 Add three non-Earth-orbiting satellites to the table.
 
-INSERT INTO spacecrafts VALUES ('Mars-2',1971, 'USSR', 'find location for new colony for USSR citizens', 'Mars', 'no', 33900321);
+INSERT INTO spacecrafts VALUES (1231,'Mars-2',1971, 'USSR', 'find location for new colony for USSR citizens', 'Mars', false, 33900321);
 
-INSERT INTO spacecrafts VALUES ('2001 Mars Odyssey', 2001, 'USA', 'detect evidence of past or present water and ice', 'Mars', 'yes', 33900411); 
+INSERT INTO spacecrafts VALUES (77897,'2001 Mars Odyssey', 2001, 'USA', 'detect evidence of past or present water and ice', 'Mars', true, 33900411); 
 
-INSERT INTO spacecrafts VALUES ('MARs Express', 2003, 'Russia', 'explore mars', 'Mars', 'yes', 33900212);
+INSERT INTO spacecrafts VALUES (9394,'MARs Express', 2003, 'Russia', 'explore mars', 'Mars', true, 33900212);
 
 Remove one of the satellites from the table since it has just crashed into the planet.
 
@@ -112,12 +112,12 @@ UPDATE spacecrafts SET operational='no' WHERE name='2001 Mars Odyssey';
 
 CREATE TABLE emails(
 	id smallint,
-	subject line varchar,
+	subject_line varchar,
 	sender varchar,
 	additional_recipients text,
 	body text,
 	timestamp timestamp,
-	read char(3),
+	read bool,
 	id_email_chain smallint
 );
 
@@ -125,10 +125,10 @@ CREATE TABLE emails(
 Also provide commands that perform the following operations:
 Add three new emails to the inbox.
 
-INSERT INTO emails VALUES (1843, 'hello world', 'Josh Daguna', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nib.', TIMESTAMP '2014-02-04 21:34:32', ‘yes',4656);
+INSERT INTO emails VALUES (1843, 'hello world', 'Josh Daguna', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nib.', TIMESTAMP '2014-02-04 21:34:32', true,4656);
 
-INSERT INTO emails VALUES (3243, 'DELETE THIS', 'Jason Braxter', 'Josh Daguna, Bob Norton', 'Sed nisi. Nulla quis sem at nib.', TIMESTAMP '2018-08-08 23:44:26', 'no', 986);
-INSERT INTO emails VALUES (5213, 'Visa Fraud Attempt', 'VISA Security', '', 'Attempted Breach into account.', TIMESTAMP '2019-05-09 12:34:16', 'yes', 1932);
+INSERT INTO emails VALUES (3243, 'DELETE THIS', 'Jason Braxter', 'Josh Daguna, Bob Norton', 'Sed nisi. Nulla quis sem at nib.', TIMESTAMP '2018-08-08 23:44:26', false, 986);
+INSERT INTO emails VALUES (5213, 'Visa Fraud Attempt', 'VISA Security', '', 'Attempted Breach into account.', TIMESTAMP '2019-05-09 12:34:16', true, 1932);
 
 You deleted one of the emails, so write a command to remove the row from the inbox table.
 
@@ -136,4 +136,4 @@ DELETE FROM emails WHERE id=3243;
 
 You started reading an email but just heard a crash in another room. Mark the email as unread before investigating the crash, so you can come back and read it later.
 
-UPDATE emails SET read='no' WHERE id=5213;
+UPDATE emails SET read=false WHERE id=5213;
