@@ -4,10 +4,10 @@ A: By using the JOIN Clause, you can combine data that are held in separate tabl
 
 2. Explain, in your own words, the difference between an INNER JOIN, LEFT OUTER JOIN, and RIGHT OUTER JOIN. Give a real-world example for each.
 
-INNER JOIN determines which rows match our boolean between the tables we are querying and returns that as a result.
+INNER JOIN selects all rows that match between the given tables.
 
 Given table1 of car_owners and dream_cars.
-Given table2 of car_dealerships and cars_inventory.
+Given table2 of car_dealerships, potential_clients, and cars_inventory.
 
 SELECT table1.car_owners, table2.car_dealerships
 FROM table1
@@ -20,7 +20,7 @@ This will return a table that matches car_owners with car_dealerships that has t
 LEFT OUTER JOIN, combines two tables and the resulting number of rows will match the first table.
 
 Given table1 of car_owners and dream_cars.
-Given table2 of car_dealerships and cars_inventory.
+Given table2 of car_dealerships, potential_clients, and cars_inventory.
 
 
 SELECT table2.car_dealerships, table1.car_owners
@@ -34,7 +34,7 @@ Returns a table with all the car_dealerships and whether there is a prospective 
 RIGHT OUTER JOIN, combines two tables and the resulting number of rows will match the second table.
 
 Given table1 of car_owners and dream_cars.
-Given table2 of car_dealerships and cars_inventory.
+Given table2 of car_dealerships, potential_clients, and cars_inventory.
 
 SELECT table1.car_owners, table2.car_dealerships
 FROM table2
@@ -49,7 +49,7 @@ Returns a table that will contain all the car_owners and if their dream car is a
 A:
 A primary key refers to the identifer from the first table and a foreign key refers to an identifeir from the second table. Typically the primary key is also the foreign key and vice-versa.
 
-Using the example above, dream_cars would be the primary key and cars_inventory would be the foreign key.
+Using the example above, car_owners from table 1 would be the primary key and potential_clients from table 2 would be the foreign key.
 
 
 4. Define aliasing.
@@ -68,10 +68,24 @@ A: SELECT p.name, c.salary, c.vacation_days FROM professor as p JOIN compensatio
 
 A: It is an implicit declaration to combine two tables, it joins the two tables if both have the same column.
 
+For example, if we had two tables:
+Table 1 - employees: a list of all employees, their id, and their department name 
+Table 2 - depts: contains the department name and its manager.
+
+Using natural join we will get back a table that holds all the employees, their id, the department name, and the manager for that department.
+
+
 7. Using this Employee schema and data, write queries to find the following information:
 List all employees and all shifts.
 
-A: SELECT employees.name, shifts.start_time, shifts.end_time FROM employees JOIN shifts on employees.id = shifts.id;
+A:
+SELECT scheduled_shifts.shift_id, employees.name,  shifts.date,  shifts.start_time, shifts.end_time
+		FROM employees
+		JOIN scheduled_shifts
+		ON employees.id = scheduled_shifts.employee_id
+        JOIN shifts
+        ON shifts.id = scheduled_shifts.shift_id
+        ORDER BY shift_id ASC;
 
 8. Using this Adoption schema and data, please write queries to retrieve the following information and include the results:
 
@@ -104,4 +118,4 @@ SELECT patrons.name, holds.rank FROM holdsJOIN patrons ON holds.patron_id = pat
 
 List all of the library patrons. If they have one or more books checked out, list the books with the patrons.
 A:
-SELECT DISTINCT patrons.id, patrons.name, (SELECT checked_out.title FROM (select transactions.patron_id, books.title from transactions join books on transactions.isbn = books.isbn WHERE checked_in_date is NULL ) AS checked_out WHERE checked_out.patron_id = patrons.id) FROM transactions LEFT OUTER JOIN patrons ON transactions.patron_id = patrons.id ORDER BY patrons.id;
+SELECT * FROM patrons LEFT JOIN transactions ON transactions.patron_id = patrons.id AND transactions.checked_in_date IS NULL LEFT JOIN books on transactions.isbn = books.isbn;
